@@ -13,6 +13,6 @@ public class ViewController {
         model.addAttribute("title", "Oh Donggeon");
         model.addAttribute("body", "Hi!");
 
-        return "freemarker";
+        return "login";
     }
 }
