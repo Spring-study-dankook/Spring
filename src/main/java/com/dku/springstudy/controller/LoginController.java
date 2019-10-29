@@ -21,7 +21,7 @@ public class LoginController {
         }
     }
 
-    @PostMapping(path = "login")
+    @PostMapping("login")
     public String loginPost(@RequestParam(value = "id") String id,
                             @RequestParam(value = "password") String password) {
 
