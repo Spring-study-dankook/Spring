@@ -3,7 +3,6 @@ package com.dku.springstudy.service;
 import com.dku.springstudy.model.BoardDataList;
 import com.dku.springstudy.model.BoardType;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.management.InstanceNotFoundException;
 
