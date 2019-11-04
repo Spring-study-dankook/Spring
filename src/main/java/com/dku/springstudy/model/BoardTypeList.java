@@ -2,7 +2,7 @@ package com.dku.springstudy.model;
 
 import java.util.ArrayList;
 
-public class BoardDataList {
+public class BoardTypeList {
 
     private static ArrayList<BoardType> boardList;
 

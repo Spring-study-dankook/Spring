@@ -20,7 +20,7 @@ public class BoardController {
     public String getBoard(Model model, String title) {
 
         try {
-            BoardType board = service.getBoardData(title);
+            BoardType board = service.getBoardType(title);
 
             model.addAttribute("title", board.getTitle());
             model.addAttribute("content", board.getContent());
@@ -34,14 +34,10 @@ public class BoardController {
 
     @RequestMapping(path = "/board", method = RequestMethod.POST)
     public String updateBoard(Model model,
-                              String requestTitle, String requestContent,
                               BoardType updatedBoardData) {
 
         try {
-            BoardType requestBoardData = new BoardType(requestTitle, requestContent);
-            BoardType board = service.updateBoardData(requestBoardData, updatedBoardData);
-
-            System.out.println(requestBoardData.getTitle() + " " + requestBoardData.getContent() + " " + updatedBoardData.getTitle() + " " + updatedBoardData.getContent());
+            BoardType board = service.updateBoardType(updatedBoardData);
 
             model.addAttribute("title", board.getTitle());
             model.addAttribute("content", board.getContent());

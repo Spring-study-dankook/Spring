@@ -1,43 +1,41 @@
 package com.dku.springstudy.service;
 
-import com.dku.springstudy.model.BoardDataList;
+import com.dku.springstudy.model.BoardTypeList;
 import com.dku.springstudy.model.BoardType;
 import org.springframework.stereotype.Service;
 
 import javax.management.InstanceNotFoundException;
+import java.util.ArrayList;
 
 @Service
 public class BoardService {
 
-    public BoardType getBoardData(String title) throws InstanceNotFoundException {
+    public BoardType getBoardType(String title) throws InstanceNotFoundException {
 
-        int length = BoardDataList.getInstance().size();
+        int length = BoardTypeList.getInstance().size();
 
         for (int i = 0; i < length; i++) {
-            BoardType data = BoardDataList.getInstance().get(i);
+            BoardType boardType = BoardTypeList.getInstance().get(i);
 
-            if(data.getTitle().equals(title)) {
-                return data;
+            if(boardType.getTitle().equals(title)) {
+                return boardType;
             }
         }
 
         throw new InstanceNotFoundException();
     }
 
-    public BoardType updateBoardData(BoardType requestBoardData, BoardType changedBoardData) throws InstanceNotFoundException {
+    public BoardType updateBoardType(BoardType updatedBoardData) throws InstanceNotFoundException {
 
-        int length = BoardDataList.getInstance().size();
+        ArrayList<BoardType> boardTypeList = BoardTypeList.getInstance();
+        int length = BoardTypeList.getInstance().size();
 
         for(int i = 0; i < length; i++) {
-            BoardType data = BoardDataList.getInstance().get(i);
+            if(boardTypeList.get(i).getTitle().equals(updatedBoardData.getTitle())) {
+                    boardTypeList.get(i).setTitle(updatedBoardData.getTitle());
+                    boardTypeList.get(i).setContent(updatedBoardData.getContent());
 
-            if(requestBoardData.getTitle().equals(data.getTitle())) {
-                if(requestBoardData.getContent().equals(data.getContent())) {
-                    data.setTitle(changedBoardData.getTitle());
-                    data.setContent(changedBoardData.getContent());
-
-                    return data;
-                }
+                    return boardTypeList.get(i);
             }
         }
 
