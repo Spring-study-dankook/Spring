@@ -1,44 +1,31 @@
 package com.dku.springstudy.service;
 
-import com.dku.springstudy.model.BoardTypeList;
-import com.dku.springstudy.model.BoardType;
+import com.dku.springstudy.model.Board;
+import com.dku.springstudy.model.BoardFixture;
 import org.springframework.stereotype.Service;
-
-import javax.management.InstanceNotFoundException;
-import java.util.ArrayList;
 
 @Service
 public class BoardService {
 
-    public BoardType getBoardType(String title) throws InstanceNotFoundException {
-
-        int length = BoardTypeList.getInstance().size();
-
-        for (int i = 0; i < length; i++) {
-            BoardType boardType = BoardTypeList.getInstance().get(i);
-
-            if(boardType.getTitle().equals(title)) {
-                return boardType;
+    public Board getBoard(String title) {
+        for (Board board : BoardFixture.boardList) {
+            if (board.getTitle().equals(title)) {
+                return board;
             }
         }
 
-        throw new InstanceNotFoundException();
+        return null;
     }
 
-    public BoardType updateBoardType(BoardType updatedBoardData) throws InstanceNotFoundException {
+    public Board updateBoard(Board target) {
+        for (Board board : BoardFixture.boardList)
+            if (board.getTitle().equals(target.getTitle())) {
+                board.setTitle(target.getTitle());
+                board.setContent(target.getContent());
 
-        ArrayList<BoardType> boardTypeList = BoardTypeList.getInstance();
-        int length = BoardTypeList.getInstance().size();
-
-        for(int i = 0; i < length; i++) {
-            if(boardTypeList.get(i).getTitle().equals(updatedBoardData.getTitle())) {
-                    boardTypeList.get(i).setTitle(updatedBoardData.getTitle());
-                    boardTypeList.get(i).setContent(updatedBoardData.getContent());
-
-                    return boardTypeList.get(i);
+                return board;
             }
-        }
 
-        throw new InstanceNotFoundException();
+        return null;
     }
 }

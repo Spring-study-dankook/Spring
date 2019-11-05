@@ -1,11 +1,11 @@
 package com.dku.springstudy.model;
 
-public class BoardType {
+public class Board {
 
     private String title;
     private String content;
 
-    public BoardType(String title, String content) {
+    public Board(String title, String content) {
         this.title = title;
         this.content = content;
     }
