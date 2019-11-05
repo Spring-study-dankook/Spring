@@ -1,44 +1,49 @@
 package com.dku.springstudy.service;
 
-import com.dku.springstudy.model.BoardTypeList;
-import com.dku.springstudy.model.BoardType;
+import com.dku.springstudy.model.Board;
+import com.dku.springstudy.model.BoardFixture;
+import com.dku.springstudy.type.BoardType;
+import com.google.common.collect.Lists;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 
-import javax.management.InstanceNotFoundException;
-import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class BoardService {
 
-    public BoardType getBoardType(String title) throws InstanceNotFoundException {
+    public List<Board> getBoards(BoardType type, String title) {
+        List<Board> boards = Lists.newArrayList();
 
-        int length = BoardTypeList.getInstance().size();
-
-        for (int i = 0; i < length; i++) {
-            BoardType boardType = BoardTypeList.getInstance().get(i);
-
-            if(boardType.getTitle().equals(title)) {
-                return boardType;
+        if (StringUtils.isBlank(title)) {
+            for (Board board : BoardFixture.boardList) {
+                if (board.getType() == type) {
+                    boards.add(board);
+                }
+            }
+        } else {
+            for (Board board : BoardFixture.boardList) {
+                if (board.getType() == type && StringUtils.equals(board.getTitle(), title)) {
+                    boards.add(board);
+                }
             }
         }
 
-        throw new InstanceNotFoundException();
+        return boards;
     }
 
-    public BoardType updateBoardType(BoardType updatedBoardData) throws InstanceNotFoundException {
-
-        ArrayList<BoardType> boardTypeList = BoardTypeList.getInstance();
-        int length = BoardTypeList.getInstance().size();
-
-        for(int i = 0; i < length; i++) {
-            if(boardTypeList.get(i).getTitle().equals(updatedBoardData.getTitle())) {
-                    boardTypeList.get(i).setTitle(updatedBoardData.getTitle());
-                    boardTypeList.get(i).setContent(updatedBoardData.getContent());
-
-                    return boardTypeList.get(i);
+    public Board addBoard(Board sourceBoard) {
+        for (Board board : BoardFixture.boardList) {
+            if (sourceBoard.getType() == board.getType() &&
+                StringUtils.equals(sourceBoard.getTitle(), board.getTitle())) {
+                board.setContent(sourceBoard.getContent());
+                return sourceBoard;
             }
         }
 
-        throw new InstanceNotFoundException();
+        BoardFixture.boardList.add(sourceBoard);
+        return sourceBoard;
     }
+
+//    public boolean containsBoard(Board source) { }
 }

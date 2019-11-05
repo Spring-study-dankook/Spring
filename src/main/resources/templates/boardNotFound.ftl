@@ -7,8 +7,7 @@
 </head>
 
 <body>
-<h3>check the URI...</h3>
-<p>BaBo~~~</p>
+<h1>Board Not Found</h1>
 </body>
 
 </html>

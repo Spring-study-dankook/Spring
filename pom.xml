@@ -16,6 +16,9 @@
 
 	<properties>
 		<java.version>1.8</java.version>
+		<guava.version>28.0-jre</guava.version>
+		<commons-lang3.version>3.9</commons-lang3.version>
+		<bootstrap.version>4.3.1</bootstrap.version>
 	</properties>
 
 	<dependencies>
@@ -36,9 +39,22 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+			<version>${commons-lang3.version}</version>
+		</dependency>
+
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>${guava.version}</version>
+		</dependency>
+
+
+		<dependency>
 			<groupId>org.webjars</groupId>
 			<artifactId>bootstrap</artifactId>
-			<version>4.3.1</version>
+			<version>${bootstrap.version}</version>
 		</dependency>
 
 	</dependencies>
