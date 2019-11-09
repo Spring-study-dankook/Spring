@@ -7,9 +7,10 @@
 </head>
 
 <body>
-    <h3>${title}</h3>
-    <p>${content}</p>
-
+    <#list boardList as boardList>
+        <h2>${boardList.title}</h2>
+        <h5>${boardList.content}</h5>
+    </#list>
 </body>
 
 </html>
