@@ -23,12 +23,12 @@ public class BoardController {
     @RequestMapping(path = "/board/all", method = RequestMethod.GET)
     public String getAllBoard(Model model) {
 
-        if (Objects.isNull(BoardFixture.boardList)) {
+        if (Objects.isNull(BoardFixture.getInstance())) {
             return "board_not_found";
         }
 
         model.addAttribute("title", "모든 게시물 보여주기");
-        model.addAttribute("boardList", BoardFixture.boardList);
+        model.addAttribute("boardList", BoardFixture.getInstance());
 
         return "board";
     }
@@ -50,7 +50,7 @@ public class BoardController {
     }
 
     @RequestMapping(path = "/board/{genre}/{title}", method = RequestMethod.GET)
-    public String getBoardByTitle(Model model,
+    public String getBoardByGenreAndTitle(Model model,
                                   @PathVariable(value = "genre", required = false) String genre,
                                   @PathVariable(value = "title", required = false) String title) {
 
@@ -67,17 +67,16 @@ public class BoardController {
 
     @RequestMapping(path = "/board", method = RequestMethod.POST)
     public String updateBoard(Model model, Board target) {
+
         Board board = service.updateBoard(target);
 
         if (Objects.isNull(board)) {
             return "board_not_found";
         }
 
-        model.addAttribute("title", board.getTitle());
-        model.addAttribute("content", board.getContent());
+        model.addAttribute("title", "값이 추가 혹은 변경되었습니다!");
+        model.addAttribute("boardList", Arrays.asList(board));
 
         return "board";
     }
-
-    @RequestMapping(path = "/board")
 }

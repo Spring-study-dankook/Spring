@@ -7,19 +7,20 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class BoardService {
 
     public List<Board> getAllBoardByGenre(String genre) {
 
-        if(!isExistGenre(genre)) {
+        if(!Genre.isExistGenre(genre)) {
             return null;
         }
 
         List<Board> target = new ArrayList<>();
 
-        for (Board board : BoardFixture.boardList) {
+        for (Board board : BoardFixture.getInstance()) {
             if (board.getGenre().equals(Genre.valueOf(genre))) {
                 target.add(board);
             }
@@ -30,11 +31,11 @@ public class BoardService {
 
     public Board getBoardByGenreAndTitle(String genre, String title) {
 
-        if(!isExistGenre(genre)) {
+        if(!Genre.isExistGenre(genre)) {
             return null;
         }
 
-        for (Board board : BoardFixture.boardList) {
+        for (Board board : BoardFixture.getInstance()) {
             if(board.getGenre().equals(Genre.valueOf(genre))) {
                 if (board.getTitle().equals(title)) {
                     return board;
@@ -46,27 +47,19 @@ public class BoardService {
     }
 
     public Board updateBoard(Board target) {
-        for (Board board : BoardFixture.boardList)
-            if (board.getTitle().equals(target.getTitle())) {
-                board.setTitle(target.getTitle());
-                board.setContent(target.getContent());
 
-                return board;
-            }
-
-        return null;
-    }
-
-
-
-    private boolean isExistGenre(String target) {
-
-        for (Genre genres : Genre.values()) {
-            if(target.equals(genres.toString())) {
-                return true;
-            }
+        if(!Genre.isExistGenre(target.getGenre().toString())) {
+            return null;
         }
 
-        return false;
+        Board board = getBoardByGenreAndTitle(target.getGenre().toString(), target.getTitle());
+
+        if(Objects.isNull(board)) {
+            BoardFixture.getInstance().add(target);
+            return target;
+        }
+
+        board.setContent(target.getContent());
+        return board;
     }
 }
