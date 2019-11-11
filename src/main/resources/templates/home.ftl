@@ -8,7 +8,8 @@
 </head>
 
 <body>
-    <h2>Hello ${name}</h2>
+    <h2>${name}</h2>
+    <h2>${description}</h2>
     <p type="button" class="btn btn-lg btn-primary">primary</p>
 
     <script src="/webjars/jquery/3.0.0/jquery.min.js"></script>

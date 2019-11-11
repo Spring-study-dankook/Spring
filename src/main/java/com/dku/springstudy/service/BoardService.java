@@ -20,7 +20,7 @@ public class BoardService {
 
         List<Board> target = new ArrayList<>();
 
-        for (Board board : BoardFixture.getInstance()) {
+        for (Board board : BoardFixture.boardList) {
             if (board.getGenre().equals(Genre.valueOf(genre))) {
                 target.add(board);
             }
@@ -35,7 +35,7 @@ public class BoardService {
             return null;
         }
 
-        for (Board board : BoardFixture.getInstance()) {
+        for (Board board : BoardFixture.boardList) {
             if(board.getGenre().equals(Genre.valueOf(genre))) {
                 if (board.getTitle().equals(title)) {
                     return board;
@@ -55,7 +55,7 @@ public class BoardService {
         Board board = getBoardByGenreAndTitle(target.getGenre().toString(), target.getTitle());
 
         if(Objects.isNull(board)) {
-            BoardFixture.getInstance().add(target);
+            BoardFixture.boardList.add(target);
             return target;
         }
 
