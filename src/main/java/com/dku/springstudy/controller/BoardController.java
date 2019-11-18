@@ -20,15 +20,15 @@ public class BoardController {
     @Autowired
     BoardService service;
 
-    @RequestMapping(path = "/board/all", method = RequestMethod.GET)
+    @RequestMapping(path = {"/board/all", "/board"}, method = RequestMethod.GET)
     public String getAllBoard(Model model) {
 
-        if (Objects.isNull(BoardFixture.getInstance())) {
+        if (Objects.isNull(BoardFixture.boardList)) {
             return "board_not_found";
         }
 
         model.addAttribute("title", "모든 게시물 보여주기");
-        model.addAttribute("boardList", BoardFixture.getInstance());
+        model.addAttribute("boardList", BoardFixture.boardList);
 
         return "board";
     }
@@ -48,7 +48,7 @@ public class BoardController {
 
         return "board";
     }
-
+    
     @RequestMapping(path = "/board/{genre}/{title}", method = RequestMethod.GET)
     public String getBoardByGenreAndTitle(Model model,
                                   @PathVariable(value = "genre", required = false) String genre,

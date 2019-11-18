@@ -1,26 +1,16 @@
 package com.dku.springstudy.model;
 
-import java.util.ArrayList;
+import org.assertj.core.util.Lists;
+
 import java.util.List;
-import java.util.Objects;
 
 public class BoardFixture {
 
-    private static List<Board> boardList;
-
-    public static List<Board> getInstance() {
-
-        if(Objects.isNull(boardList)) {
-
-            boardList = new ArrayList<>();
-
-            boardList.add(new Board("LANGUAGE", "JAVA", "WTF"));
-            boardList.add(new Board("LANGUAGE", "JAVASCRIPT", "SO HARD"));
-            boardList.add(new Board("MUSIC", "Lauv", "Sims"));
-            boardList.add(new Board("IDE", "JetBrains", "IntelliJ IDEA"));
-            boardList.add(new Board("LANGUAGE", "KOTLIN", "TREND"));
-        }
-
-        return boardList;
-    }
+    public static List<Board> boardList = Lists.newArrayList(
+            new Board("LANGUAGE", "JAVA", "WTF"),
+            new Board("LANGUAGE", "JAVASCRIPT", "SO HARD"),
+            new Board("MUSIC", "Lauv", "Sims"),
+            new Board("IDE", "JetBrains", "IntelliJ IDEA"),
+            new Board("LANGUAGE", "KOTLIN", "TREND")
+            );
 }

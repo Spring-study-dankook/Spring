@@ -17,20 +17,6 @@ public class Board {
         this.content = content;
     }
 
-    /*
-    public static boolean isBoardNull(Board board) {
-        if(board.getGenre() == null) {
-            if(board.getTitle() == null) {
-                if(board.getContent() == null) {
-                    return true;
-                }
-            }
-        }
-
-        return false;
-    }
-    */
-
     public Genre getGenre() {
         return genre;
     }
